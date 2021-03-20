@@ -1,12 +1,12 @@
 export const players = [
   {
-    name: "",
-    color: "Yellow",
+    name: "Player one",
+    color: "yellow",
     points: 0,
   },
   {
-    name: "",
-    color: "Red",
+    name: "Player two",
+    color: "red",
     points: 0,
   },
 ];

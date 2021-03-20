@@ -7,7 +7,6 @@ import WinnerModal from "./WinnerModal";
 const Game = ({ players }) => {
   return (
     <div className="game">
-      <CurrentPlayer />
       <Board players={players} />
       <Scoreboad />
     </div>

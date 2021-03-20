@@ -1,6 +1,6 @@
-const CurrentPlayer = () => {
+const CurrentPlayer = ({ player }) => {
     return (
-         <div>Current player: TODO</div>
+         <div>Current player: {player.name}</div>
     );
 };
 

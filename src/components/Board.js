@@ -1,22 +1,26 @@
 import { useState } from "react";
 
 import Square from "./Square";
-import { startBoard } from "./../constants.js";
+import { startBoard, players } from "./../constants.js";
+import CurrentPlayer from "./CurrentPlayer";
 
-const Board = ({ currentPlayer }) => {
+const Board = () => {
   const [squares, setSquares] = useState(startBoard);
+  const [nextPlayerOnMove, setNextPlayerOnMove] = useState(players[0]);
 
   const handleClick = (squareNumber) => {
     const updatedSquares = squares.slice();
-    updatedSquares[squareNumber] = "red";
+    updatedSquares[squareNumber] = nextPlayerOnMove.color;
     setSquares(updatedSquares);
+
+    const nextPlayerIndex = nextPlayerOnMove === players[0] ? 1 : 0;
+    setNextPlayerOnMove(players[nextPlayerIndex]);
   };
 
-  function renderSquare(squareNumber, currentPlayer) {
+  function renderSquare(squareNumber) {
     return (
       <Square
         color={squares[squareNumber]}
-        player={currentPlayer}
         onClick={() => {
           handleClick(squareNumber);
         }}
@@ -26,6 +30,7 @@ const Board = ({ currentPlayer }) => {
 
   return (
     <div className="board">
+      <CurrentPlayer player={nextPlayerOnMove} />
       <div className="board-row">
         {renderSquare(0)}
         {renderSquare(1)}
