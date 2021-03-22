@@ -1,10 +1,10 @@
 import PlayerScore from "./PlayerScore";
 
-const Scoreboad = () => {
+const Scoreboad = ({playerOne, playerTwo}) => {
   return (
     <div className="scoreboard">
-      <PlayerScore name="Player1" points="11" />
-      <PlayerScore name="Player2" points="22" />
+      <PlayerScore username={playerOne.username} score={playerOne.score} />
+      <PlayerScore username={playerTwo.username} score={playerTwo.score} />
       <button className="scoreboard__reset-button">Reset</button>
     </div>
   );

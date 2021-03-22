@@ -1,4 +1,4 @@
-import { boardColumns, winningLines } from "./../constants";
+import { boardColumns, winningLines, playerColors } from "./../constants";
 
 export const drop = (squares, squareNumber) => {
   const droppingSquareCandidates = boardColumns.find(
@@ -6,9 +6,9 @@ export const drop = (squares, squareNumber) => {
   ).squares;
 
   return droppingSquareCandidates.find((id) => squares[id] === null);
-};
+  };
 
-export const calculateWinner = (squares, players) => {
+export const calculateWinner = (squares, playerOne, playerTwo) => {
   for (let i = 0; i < winningLines.length; i++) {
     const [a, b, c, d] = winningLines[i];
 
@@ -18,7 +18,8 @@ export const calculateWinner = (squares, players) => {
       squares[a] === squares[c] &&
       squares[a] === squares[d]
     ) {
-      return players.find((player) => player.color === squares[a]);
+      return squares[a] === playerColors.playerOne ? playerOne : playerTwo;
     }
   }
+
 };

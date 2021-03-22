@@ -3,44 +3,70 @@ import { useState } from "react";
 import { constructPlayer } from "./utils/defaults";
 import Game from "./components/Game";
 import InitializerForm from "./components/InitializerForm";
+import { playerColors } from "./constants";
 
 const initialState = {
-    playerOne: constructPlayer("yellow"),
-    playerTwo: constructPlayer("red"),
+  playerOne: constructPlayer("yellow"),
+  playerTwo: constructPlayer("red"),
 };
 
 const App = () => {
   const [players, setPlayers] = useState(initialState);
+  const [arePlayersEntered, setArePlayersEntered] = useState(false);
 
   const playerNamesSubmitHandler = (event) => {
     event.preventDefault();
+    const { playerOne, playerTwo } = players;
+    let [playerOneName, playerTwoName] = [
+      playerOne.username,
+      playerTwo.username,
+    ];
 
-    console.log(players);/*
     if (playerOneName === playerTwoName) {
       playerOneName += "-1";
-      playerOneName += "-2";
+      playerTwoName += "-2";
+
+      setPlayers((prevPlayers) => {
+        return {
+          playerOne: {
+            ...prevPlayers.playerOne,
+            username: playerOne.username + "-1",
+          },
+          playerTwo: {
+            ...prevPlayers.playerTwo,
+            username: playerTwo.username + "-2",
+          },
+        };
+      });
     }
 
-    setPlayers((prev) => {
+    setArePlayersEntered(true);
+  };
+
+  const gameWinHandler = (gameWinner) => {
+    setPlayers((prevPlayers) => {
+      const prevScore = gameWinner.score;
+      const playerId =
+        gameWinner.color === playerColors.playerOne ? "playerOne" : "playerTwo";
 
       return {
-        playerOne: { ...prev.players.playerOne, name: playerOneName },
-        playerTwo: { ...prev.players.playerTwo, name: playerTwoName },
-        valid: true,
+        ...prevPlayers,
+        [playerId]: { ...gameWinner, score: prevScore + 1 },
       };
     });
-*/
   };
+
   return (
     <div>
-      <InitializerForm
-        onPlayerNamesSubmit={
-          (playerOneName, playerTwoName) => playerNamesSubmitHandler(playerOneName, playerTwoName)
-        }
-        playerOneName={players.playerOne.name}
-        playerTwoName={players.playerTwo.name}
-        setPlayers={setPlayers}
-      />
+      {arePlayersEntered ? (
+        <Game players={players} onGameWin={gameWinHandler} />
+      ) : (
+        <InitializerForm
+          onPlayerNamesSubmit={playerNamesSubmitHandler}
+          players={players}
+          setPlayers={setPlayers}
+        />
+      )}
     </div>
   );
 };

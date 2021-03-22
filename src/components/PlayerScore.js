@@ -1,8 +1,8 @@
-const PlayerScore = ({ name, points }) => {
+const PlayerScore = ({ username, score }) => {
     return (
         <div className="player-score">
-            <span className="player-score__name">{name}</span>
-            <span className="player-score__points">{points}</span>
+            <span className="player-score__name">{username}</span>
+            <span className="player-score__points">{score}</span>
         </div>
     );
 }

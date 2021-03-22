@@ -1,9 +1,16 @@
 import { useState } from "react";
-import { players } from "../constants";
 
-const InitializerForm = ({ onPlayerNamesSubmit, players, setPlayers }) => {
+const InitializerForm = ({
+  onPlayerNamesSubmit,
+  players: {playerOne, playerTwo},
+  setPlayers,
+}) => {
   const handleChange = ({ target: { name, value } }) => {
-    setPlayers((prevPlayers) => ({ [name]: { ...[name], name: value } }));
+    setPlayers(
+      (prevPlayers) => (
+        { ...prevPlayers ,  [name]: { ...prevPlayers[name], username: value } }
+      )
+    );
   };
 
   return (
@@ -13,14 +20,14 @@ const InitializerForm = ({ onPlayerNamesSubmit, players, setPlayers }) => {
       onSubmit={onPlayerNamesSubmit}
     >
       <input
-        value={players.playerOne.name}
+        value={playerOne.username}
         name="playerOne"
         onChange={handleChange}
         className="player-name-input"
         placeholder="Player one name"
       />
       <input
-        value={players.playerTwo.name}
+        value={playerTwo.username}
         name="playerTwo"
         onChange={handleChange}
         className="player-name-input"

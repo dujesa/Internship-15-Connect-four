@@ -1,33 +1,25 @@
-export const players = [
-  {
-    name: "Player one",
-    color: "yellow",
-    points: 0,
-  },
-  {
-    name: "Player two",
-    color: "red",
-    points: 0,
-  },
-];
+export const playerColors = {
+  playerOne: "yellow",
+  playerTwo: "red",
+};
 
 export const boardRows = [
-  {start: 0, stop: 6},
-  {start: 7, stop: 13},
-  {start: 14, stop: 20},
-  {start: 21, stop: 27},
-  {start: 28, stop: 34},
-  {start: 35, stop: 41},
+  { start: 0, stop: 6 },
+  { start: 7, stop: 13 },
+  { start: 14, stop: 20 },
+  { start: 21, stop: 27 },
+  { start: 28, stop: 34 },
+  { start: 35, stop: 41 },
 ];
 
 export const boardColumns = [
-  {column: 0, squares: [35, 28, 21, 14, 7, 0]},
-  {column: 1, squares: [36, 29, 22, 15, 8, 1]},
-  {column: 2, squares: [37, 30, 23, 16, 9, 2]},
-  {column: 3, squares: [38, 31, 24, 17, 10, 3]},
-  {column: 4, squares: [39, 32, 25, 18, 11, 4]},
-  {column: 5, squares: [40, 33, 26, 19, 12, 5]},
-  {column: 6, squares: [41, 34, 27, 20, 13, 6]},
+  { column: 0, squares: [35, 28, 21, 14, 7, 0] },
+  { column: 1, squares: [36, 29, 22, 15, 8, 1] },
+  { column: 2, squares: [37, 30, 23, 16, 9, 2] },
+  { column: 3, squares: [38, 31, 24, 17, 10, 3] },
+  { column: 4, squares: [39, 32, 25, 18, 11, 4] },
+  { column: 5, squares: [40, 33, 26, 19, 12, 5] },
+  { column: 6, squares: [41, 34, 27, 20, 13, 6] },
 ];
 
 export const winningLines = [
