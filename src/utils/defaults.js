@@ -2,7 +2,7 @@ export const constructPlayer = (color) => {
   return {
     username: "",
     color: color,
-    score: null,
+    score: 0,
   };
 };
 

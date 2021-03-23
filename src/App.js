@@ -56,10 +56,21 @@ const App = () => {
     });
   };
 
+  const scoreResetHandler = () => {
+    setPlayers(({ playerOne, playerTwo }) => ({
+      playerOne: { ...playerOne, score: 0 },
+      playerTwo: { ...playerTwo, score: 0 },
+    }));
+  };
+
   return (
     <div>
       {arePlayersEntered ? (
-        <Game players={players} onGameWin={gameWinHandler} />
+        <Game
+          players={players}
+          onGameWin={gameWinHandler}
+          onScoreReset={scoreResetHandler}
+        />
       ) : (
         <InitializerForm
           onPlayerNamesSubmit={playerNamesSubmitHandler}

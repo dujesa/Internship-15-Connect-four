@@ -7,8 +7,15 @@ import WinnerModal from "./WinnerModal";
 import { constructBoard } from "./../utils/defaults";
 import { drop, calculateWinner } from "./../utils/move";
 
-const Game = ({ players: { playerOne, playerTwo }, onGameWin }) => {
-  const [winner, setWinner] = useState(null);
+const Game = ({
+  players: { playerOne, playerTwo },
+  onGameWin,
+  onScoreReset,
+}) => {
+  const [gameDetails, setGameDetails] = useState({
+    isOver: false,
+    winner: null,
+  });
   const [nextPlayerOnMove, setNextPlayerOnMove] = useState(playerOne);
   const [squares, setSquares] = useState(constructBoard);
 
@@ -16,12 +23,15 @@ const Game = ({ players: { playerOne, playerTwo }, onGameWin }) => {
     const gameWinner = calculateWinner(squares, playerOne, playerTwo);
     if (!gameWinner) return;
 
-    setWinner(gameWinner);
+    setGameDetails((prevGameDetails) => ({
+      isOver: true,
+      winner: gameWinner.color === playerOne.color ? "playerOne" : "playerTwo",
+    }));
     onGameWin(gameWinner);
   }, [squares]);
 
   const handleSquareDrop = (clickedSquareNumber) => {
-    if (!!winner) return;
+    if (gameDetails.isOver) return;
 
     const dropSquareIndex = drop(squares, clickedSquareNumber);
     const updatedSquares = squares.slice();
@@ -34,10 +44,21 @@ const Game = ({ players: { playerOne, playerTwo }, onGameWin }) => {
     setNextPlayerOnMove(nextPlayer);
   };
 
+  const newGameHandler = () => {
+    setSquares(constructBoard);
+    setGameDetails({
+      isOver: false,
+      winner: null,
+    });
+  };
+
   return (
     <div className="game">
-      {winner ? (
-        <WinnerModal player={winner} />
+      {gameDetails.isOver ? (
+        <WinnerModal
+          player={gameDetails.winner === "playerOne" ? playerOne : playerTwo}
+          onNewGame={newGameHandler}
+        />
       ) : (
         <CurrentPlayer player={nextPlayerOnMove} />
       )}
@@ -47,7 +68,11 @@ const Game = ({ players: { playerOne, playerTwo }, onGameWin }) => {
         onSquareDrop={handleSquareDrop}
         squares={squares}
       />
-      <Scoreboad playerOne={playerOne} playerTwo={playerTwo}/>
+      <Scoreboad
+        playerOne={playerOne}
+        playerTwo={playerTwo}
+        onScoreReset={onScoreReset}
+      />
     </div>
   );
 };
