@@ -6,16 +6,14 @@ import CurrentPlayer from "./CurrentPlayer";
 import WinnerModal from "./WinnerModal";
 import { constructBoard } from "./../utils/defaults";
 import { drop, calculateWinner } from "./../utils/move";
+import { newGameDetails } from "./../constants";
 
 const Game = ({
   players: { playerOne, playerTwo },
   onGameWin,
   onScoreReset,
 }) => {
-  const [gameDetails, setGameDetails] = useState({
-    isOver: false,
-    winner: null,
-  });
+  const [gameDetails, setGameDetails] = useState(newGameDetails);
   const [nextPlayerOnMove, setNextPlayerOnMove] = useState(playerOne);
   const [squares, setSquares] = useState(constructBoard);
 
@@ -23,10 +21,10 @@ const Game = ({
     const gameWinner = calculateWinner(squares, playerOne, playerTwo);
     if (!gameWinner) return;
 
-    setGameDetails((prevGameDetails) => ({
+    setGameDetails({
       isOver: true,
       winner: gameWinner.color === playerOne.color ? "playerOne" : "playerTwo",
-    }));
+    });
     onGameWin(gameWinner);
   }, [squares]);
 
@@ -46,22 +44,19 @@ const Game = ({
 
   const newGameHandler = () => {
     setSquares(constructBoard);
-    setGameDetails({
-      isOver: false,
-      winner: null,
-    });
+    setGameDetails(newGameDetails);
   };
 
   return (
     <div className="game">
-      {gameDetails.isOver ? (
+      {gameDetails.isOver && (
         <WinnerModal
           player={gameDetails.winner === "playerOne" ? playerOne : playerTwo}
           onNewGame={newGameHandler}
         />
-      ) : (
-        <CurrentPlayer player={nextPlayerOnMove} />
       )}
+      <CurrentPlayer player={nextPlayerOnMove} />
+
       <Board
         playerOne={playerOne}
         playerTwo={playerTwo}

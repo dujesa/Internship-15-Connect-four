@@ -3,6 +3,11 @@ export const playerColors = {
   playerTwo: "red",
 };
 
+export const newGameDetails = {
+  isOver: false,
+  winner: null,
+};
+
 export const boardRows = [
   { start: 0, stop: 6 },
   { start: 7, stop: 13 },

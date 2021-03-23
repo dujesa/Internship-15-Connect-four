@@ -19,3 +19,86 @@ code {
 .yellow {
   background-color: yellow;
 }
+
+.connect-four-app {
+  display: flex;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+}
+
+.current-player {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  max-height: 40px;
+  width: 200px;
+}
+
+.current-player__square--red, .current-player__square--yellow, .current-player__square--white {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 1px solid black;
+  display:inline-block;
+}
+
+.current-player__square--yellow {
+  background-color: yellow;
+}
+
+.current-player__square--red {
+  background-color: red;
+}
+
+.current-player__square--white {
+  background-color: white;
+}
+
+.scoreboard {
+  height: 100px;
+  width: 200px;
+  padding: 10px;
+  margin-left: 40px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.player-score {
+  margin-left: 10px;
+  display: flex;
+}
+
+.player-score > span {
+  margin-right: 2px;
+}
+
+.player-score__name {
+  width: 50%;
+}
+
+.scoreboard__reset-button {
+  width: fit-content;
+  align-self: center;
+  background-color: white;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.board-row {
+  height: 40px;
+}
+
+.board {
+  margin-top: 40px;
+  margin-left: -60px;
+}
+
+.square {
+  height: 100%;
+  width: 40px;
+}

@@ -12,20 +12,22 @@ const initialState = {
 
 const App = () => {
   const [players, setPlayers] = useState(initialState);
+  const [initializerFormErrors, setInitializerFormErrors] = useState([]);
   const [arePlayersEntered, setArePlayersEntered] = useState(false);
 
   const playerNamesSubmitHandler = (event) => {
     event.preventDefault();
     const { playerOne, playerTwo } = players;
-    let [playerOneName, playerTwoName] = [
-      playerOne.username,
-      playerTwo.username,
-    ];
 
-    if (playerOneName === playerTwoName) {
-      playerOneName += "-1";
-      playerTwoName += "-2";
+    if (!playerOne.username || !playerTwo.username) {
+      setInitializerFormErrors([
+        "Players must have usernames inputted to start game!",
+      ]);
 
+      return;
+    }
+
+    if (playerOne.username === playerTwo.username) {
       setPlayers((prevPlayers) => {
         return {
           playerOne: {
@@ -64,7 +66,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="connect-four-app">
       {arePlayersEntered ? (
         <Game
           players={players}
@@ -74,6 +76,7 @@ const App = () => {
       ) : (
         <InitializerForm
           onPlayerNamesSubmit={playerNamesSubmitHandler}
+          formErrors={initializerFormErrors}
           players={players}
           setPlayers={setPlayers}
         />

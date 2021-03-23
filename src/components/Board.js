@@ -1,8 +1,5 @@
-import { useState } from "react";
-
 import Square from "./Square";
-import { winningLines, boardRows, boardColumns } from "./../constants";
-
+import { boardRows } from "./../constants";
 
 const Board = ({ onSquareDrop, squares }) => {
   const renderSquare = (value, rowNumber, columnNumber) => {
@@ -15,7 +12,7 @@ const Board = ({ onSquareDrop, squares }) => {
         onClick={() => onSquareDrop(squareNumber)}
       />
     );
-  }
+  };
 
   return (
     <div className="board">

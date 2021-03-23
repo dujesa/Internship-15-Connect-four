@@ -6,7 +6,7 @@ export const drop = (squares, squareNumber) => {
   ).squares;
 
   return droppingSquareCandidates.find((id) => squares[id] === null);
-  };
+};
 
 export const calculateWinner = (squares, playerOne, playerTwo) => {
   for (let i = 0; i < winningLines.length; i++) {
@@ -21,5 +21,4 @@ export const calculateWinner = (squares, playerOne, playerTwo) => {
       return squares[a] === playerColors.playerOne ? playerOne : playerTwo;
     }
   }
-
 };
