@@ -22,3 +22,7 @@ export const calculateWinner = (squares, playerOne, playerTwo) => {
     }
   }
 };
+
+export const isDraw = (squares) => {
+  return !squares.includes(null);
+}

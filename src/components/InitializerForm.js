@@ -13,28 +13,36 @@ const InitializerForm = ({
 
   return (
     <form className="initializer-form" onSubmit={onPlayerNamesSubmit}>
-      {formErrors.length > 0 && (
-        <div className="initializer-form__errors">
-          {formErrors.map((error) => (
-            <p className="errors__message">{error}</p>
-          ))}
-        </div>
-      )}
+      <div className="initializer-form__players-container">
+        <input
+          value={playerOne.username}
+          name="playerOne"
+          onChange={handleChange}
+          className="player-name-input player-one"
+          placeholder="Player one name"
+        />
+
+        <input
+          value={playerTwo.username}
+          name="playerTwo"
+          onChange={handleChange}
+          className="player-name-input player-two"
+          placeholder="Player two name"
+        />
+
+        {formErrors.length > 0 && (
+          <div className="initializer-form__errors">
+            {formErrors.map((error) => (
+              <p className="errors__message">{error}</p>
+            ))}
+          </div>
+        )}
+      </div>
       <input
-        value={playerOne.username}
-        name="playerOne"
-        onChange={handleChange}
-        className="player-name-input"
-        placeholder="Player one name"
+        type="submit"
+        value="Start game!"
+        className="initializer-form__start-button"
       />
-      <input
-        value={playerTwo.username}
-        name="playerTwo"
-        onChange={handleChange}
-        className="player-name-input"
-        placeholder="Player two name"
-      />
-      <input type="submit" value="Submit" />
     </form>
   );
 };

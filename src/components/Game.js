@@ -5,7 +5,7 @@ import Scoreboad from "./Scoreboard";
 import CurrentPlayer from "./CurrentPlayer";
 import WinnerModal from "./WinnerModal";
 import { constructBoard } from "./../utils/defaults";
-import { drop, calculateWinner } from "./../utils/move";
+import { drop, calculateWinner, isDraw } from "./../utils/move";
 import { newGameDetails } from "./../constants";
 
 const Game = ({
@@ -19,12 +19,26 @@ const Game = ({
 
   useEffect(() => {
     const gameWinner = calculateWinner(squares, playerOne, playerTwo);
-    if (!gameWinner) return;
+    const isGameDraw = isDraw(squares);
+
+    if (!gameWinner && !isGameDraw) return;
+
+    if (isGameDraw) {
+      setGameDetails({
+        isOver: true,
+        isDraw: true,
+        winner: null,
+      });
+
+      return;
+    }
 
     setGameDetails({
       isOver: true,
+      isDraw: false,
       winner: gameWinner.color === playerOne.color ? "playerOne" : "playerTwo",
     });
+
     onGameWin(gameWinner);
   }, [squares]);
 
@@ -52,6 +66,7 @@ const Game = ({
       {gameDetails.isOver && (
         <WinnerModal
           player={gameDetails.winner === "playerOne" ? playerOne : playerTwo}
+          isDraw={gameDetails.isDraw}
           onNewGame={newGameHandler}
         />
       )}

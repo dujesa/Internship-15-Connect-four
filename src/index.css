@@ -1,14 +1,14 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -22,9 +22,36 @@ code {
 
 .connect-four-app {
   display: flex;
+  max-width: 1000px;
+  margin: 100px auto;
+}
+
+.initializer-form {
+  margin: 0 auto;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.initializer-form__players-container {
+  height: 100px;
+}
+
+.initializer-form__errors {
+  color: red;
+}
+
+.player-name-input {
+  width: 198px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid black;
 }
 
 .game {
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
 }
@@ -37,12 +64,14 @@ code {
   width: 200px;
 }
 
-.current-player__square--red, .current-player__square--yellow, .current-player__square--white {
+.current-player__square--red,
+.current-player__square--yellow,
+.current-player__square--white {
   height: 20px;
   width: 20px;
   border-radius: 50%;
   border: 1px solid black;
-  display:inline-block;
+  display: inline-block;
 }
 
 .current-player__square--yellow {
@@ -81,6 +110,10 @@ code {
   width: 50%;
 }
 
+.player-score__points {
+  margin-left: 6px;
+}
+
 .scoreboard__reset-button {
   width: fit-content;
   align-self: center;
@@ -101,4 +134,28 @@ code {
 .square {
   height: 100%;
   width: 40px;
+}
+
+.winner-modal {
+  position: absolute;
+  background-color: white;
+  top: 100px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.winner-modal__result {
+  width: 30%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.winner-modal__new-game {
+  width: 10%;
+  align-self: center;
 }

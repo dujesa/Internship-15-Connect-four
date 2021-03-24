@@ -5,6 +5,7 @@ export const playerColors = {
 
 export const newGameDetails = {
   isOver: false,
+  isDraw: false,
   winner: null,
 };
 
